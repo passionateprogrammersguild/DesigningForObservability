@@ -4,20 +4,75 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Designing for Observability</title>
 
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+		<link rel="stylesheet" href="dist/theme/white.css">
 
 		<!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css">
 	</head>
 	<body>
+		<div>
+			<!-- Logo goes here-->
+			<img src="img/logo.png" height="50" widtrh="50" alt="Suddath logo"/>
+		</div>
 		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+					<h1>Designing for Observability </h1>
+					<h3>An exercise with Microsoft Azure</h3>
+					<aside class="notes">
+						Welcome and thank you for attending this talk.  I am super-excited to share this material with you.  How many people are practicing monitoring, measureing system health and observability in their systems today?
+	 				</aside>
+				</section>
+
+				<!--A Little about me -->				
+				<section>
+					<div>
+						<img src="img/me.jpg">
+					</div>
+
+					<p>
+						Hi, I'm Michael Mann and I work at Suddath. We are a Transportation and Logistics company that has been in business for over 100 years.
+					</p>
+				</section>
+									
+				
+				<section data-markdown>
+					<script type="text/template">
+						## What we will cover in this talk
+						- Understand the terms Health, Monitoring and Observability
+						- Review the Architecture of a sytem in the context of observability
+						- Examine the tools available
+						- Apply what we have learned to an existing system
+					</script>
+				</section>
+				
+
+				<section>
+					<section data-background="img/birdwatching.jpg">
+						<h2 style="color:white;">Definition of Terms</h2>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## System Health
+														
+							According the the [World Health Organization](https://www.who.int/about/governance/constitution), health is defined as a state of complete physical, mental and social well-being and not merely the absence of disease or infirmity.
+						</script>
+					</section>
+				</section>
+								
+				
+				<section>
+					<h1>Thank you</h2>
+					<div>							
+						<span><a href="mailto:mmann2943@gmail.com">mmann2943@gmail.com</a></span>							
+					</div>
+				</section>					
 			</div>
 		</div>
 
