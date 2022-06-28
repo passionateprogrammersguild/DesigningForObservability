@@ -7,3 +7,4 @@ Welcome to Designing for Observability, An exercise with Microsoft Azure.  This 
 
 # Run the Presentation
 - To launch the presentation execute `npm start`
+- To Navigate the presentation use the left (back) right (forward) arrow keys.  Vertical slides are also supported therefore the up and down arrow keys are used to navigate logical groupings of content.

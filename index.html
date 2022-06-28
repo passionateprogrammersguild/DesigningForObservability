@@ -56,8 +56,8 @@
 						## What we will cover in this talk
 						- Understand the terms Health, Monitoring and Observability
 						- Review the Architecture of a sytem in the context of observability
-						- Examine the tools available
-						- Apply what we have learned to an existing system						
+						- Examine the tools available in the Azure ecosystem
+						- Apply what we have learned to an existing system
 					</script>
 				</section>
 				
@@ -87,7 +87,7 @@
 						<script type="text/template">
 							## Observability
 														
-							According to [Honeycomb](https://docs.honeycomb.io/getting-started/learning-about-observability/) observability is defined as Observability is about being able to ask arbitrary questions about your environment without having to know ahead of time what you wanted to ask.
+							According to [Honeycomb](https://docs.honeycomb.io/getting-started/learning-about-observability/) observability is about being able to ask arbitrary questions about your environment without having to know ahead of time what you wanted to ask.
 						</script>
 					</section>
 				</section>					
@@ -107,10 +107,51 @@
 							[Estimator &#174;](https://suddath.com/news/suddath-wins-digital-edge-50-international-technology-award/) is an application primarilary used by Salespeople to estimate business moves.  The application is designed to be mobile first such that Salespeople can perform an estimate on-site.
 						</script>
 					</section>
-					<section data-background="img/estimator-architecture.png">
-						## Placeholder for Estimator Architecture
+
+					<section data-markdown>
+						<script type="text/template">
+							#### Estimator Desktop Application
+							![Alt text](img/estimator-architecture.png "Estimator Architecture")
+						</script>
 					</section>
-				</section>								
+
+					<section data-markdown>
+						<script type="text/template">
+							#### Estimator Rate Management Web Application
+							![Alt text](img/estimator-ratemanagement.png "Estimator Rate Management Web Application Architecture")
+						</script>						
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							#### Estimator Inventory Management Web Application
+							![Alt text](img/estimator-inventorymanagement.png "Estimator Inventory Management Web Application Architecture")
+						</script>						
+					</section>					
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							## Estimator Health - An outside in approach
+														
+							- Identify the network connections in the architecture
+							- Identify supporting services services
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Adding [HealthChecks](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-6.0) to your application
+							- [Microsoft.Extensions.Diagnostics.HealthChecks](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks)
+							- [AspNetCore.HealthChecks.UI.Client](https://www.nuget.org/packages/AspNetCore.HealthChecks.UI.Client)
+							- [AspNetCore.HealthChecks.SqlServer](https://www.nuget.org/packages/AspNetCore.HealthChecks.SqlServer)
+							- [AspNetCore.HealthChecks.AzureStorage](https://www.nuget.org/packages/AspNetCore.HealthChecks.AzureStorage)
+							- [Create your own HealthCheck](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-6.0#create-health-checks)
+						</script>
+					</section>
+				</section>
+
 				
 				<section>
 					<h1>Thank you</h2>
