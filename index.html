@@ -110,6 +110,20 @@
 
 					<section data-markdown>
 						<script type="text/template">
+							## High-level components
+														
+							- Desktop application
+							- Web Application for managing rates
+							- Web Application for managing  custom inventory
+							- Web properties hosted in Microsoft Azure
+							- Authentication / Authorization partner is Auth0
+							- Documents stored in Azure Blob Storage
+							- Hosted Sql Azure database
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
 							#### Estimator Desktop Application
 							![Alt text](img/estimator-architecture.png "Estimator Architecture")
 						</script>
@@ -142,7 +156,49 @@
 
 					<section data-markdown>
 						<script type="text/template">
-							## Adding [HealthChecks](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-6.0) to your application
+							#### Exercise #1 - An outside in approach to health
+							![Alt text](img/estimator-architecture.png "Estimator Architecture")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">							
+							![Alt text](img/estimator-architecture-health.png "Estimator Architecture")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							#### Exercise #2 - An outside in approach to health
+							![Alt text](img/estimator-ratemanagement.png "Estimator Rate Management Web Application Architecture")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							![Alt text](img/estimator-ratemanagement-health.png "Estimator Rate Management Web Application Architecture")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							#### Exercise #3 - An outside in approach to health
+							![Alt text](img/estimator-inventorymanagement.png "Estimator Inventory Management Web Application Architecture")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							![Alt text](img/estimator-inventorymanagement-health.png "Estimator Inventory Management Web Application Architecture")
+						</script>
+					</section>					
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							## Tools to add [Helth Checks](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-6.0) to an existing system
+														
 							- [Microsoft.Extensions.Diagnostics.HealthChecks](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks)
 							- [AspNetCore.HealthChecks.UI.Client](https://www.nuget.org/packages/AspNetCore.HealthChecks.UI.Client)
 							- [AspNetCore.HealthChecks.SqlServer](https://www.nuget.org/packages/AspNetCore.HealthChecks.SqlServer)
