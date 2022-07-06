@@ -36,8 +36,14 @@
 					</div>
 
 					<p>
-						Hi, I'm Michael Mann and I work at Suddath. We are a Transportation and Logistics company that has been in business for over 100 years.
+						Hi, I'm Michael Mann. I am the Technical Lead for the Moving and Logistics Division at Suddath. Suddath is a Transportation and Logistics company that has been in business for over 100 years.
 					</p>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						![Alt text](img/organization.png "Organizational Structure")
+					</script>
 				</section>
 
 				<section data-markdown>
@@ -49,13 +55,13 @@
 						- Desktop Applications - [WinUI3](https://docs.microsoft.com/en-us/windows/apps/winui/winui3/) with [Realm](https://realm.io/) for local sync and API's in C#
 						- Mobile Applications - [Xamarin Forms](https://docs.microsoft.com/en-us/xamarin/get-started/what-is-xamarin-forms) with [Realm](https://realm.io/) for local sync and API's in C# 						
 					</script>
-				</section>					
+				</section>				
 				
 				<section data-markdown>
 					<script type="text/template">						
 						## What we will cover in this talk
 						- Understand the terms Health, Monitoring and Observability
-						- Review the Architecture of a sytem in the context of observability
+						- Review the Architecture of a sytem in the context of health, monitoring, and observability
 						- Examine the tools available in the Azure ecosystem
 						- Apply what we have learned to an existing system
 					</script>
@@ -147,10 +153,11 @@
 				<section>
 					<section data-markdown>
 						<script type="text/template">
-							## Estimator Health - An outside in approach
-														
-							- Identify the network connections in the architecture
-							- Identify supporting services services
+							### [Health checks in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-6.0)
+
+							- Health probes can be used by container orchestrators and load balancers to check an app's status.
+							- Use of memory, disk, and other physical server resources can be monitored for healthy status.
+							- Health checks can test an app's dependencies, such as databases and external service endpoints, to confirm availability and normal functioning.
 						</script>
 					</section>
 
@@ -191,10 +198,8 @@
 						<script type="text/template">
 							![Alt text](img/estimator-inventorymanagement-health.png "Estimator Inventory Management Web Application Architecture")
 						</script>
-					</section>					
-				</section>
+					</section>
 
-				<section>
 					<section data-markdown>
 						<script type="text/template">
 							## Tools to add [Helth Checks](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-6.0) to an existing system
@@ -206,6 +211,38 @@
 							- [Create your own HealthCheck](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-6.0#create-health-checks)
 						</script>
 					</section>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							### [Monitoring in Azure with Application Insights](https://docs.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview)
+
+							Application Insights helps development teams understand app performance and usage.
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							### Application Insights Monitors
+
+							- Request rates, response times, and failure rates
+							- Dependency rates, response times, and failure rates
+							- Exceptions
+							- Diagnostic trace logs from apps
+							- Custom events and metrics in client or server code that track business events
+							- Performance counters from Windows or Linux server machines, such as CPU, memory, and network usage
+						</script>
+					</section>
+					
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							### Observability in Azure with [Alerts](https://docs.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-overview) and [Kusto](https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/)
+							
+						</script>
+					</section>					
 				</section>
 
 				
