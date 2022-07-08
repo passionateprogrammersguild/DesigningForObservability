@@ -233,7 +233,58 @@
 							- Performance counters from Windows or Linux server machines, such as CPU, memory, and network usage
 						</script>
 					</section>
-					
+
+					<section data-markdown>
+						<script type="text/template">
+							### [Application Insights SDK](https://docs.microsoft.com/en-us/azure/azure-monitor/app/asp-net-core)
+
+							- TelemetryClient - Client for the App Insights SDK
+							- TelemetryInitializer - Enriches telemetry with additional information
+							- TelemetryProcessor - Enables the ability to discard un-nedded telemetry
+						</script>
+					</section>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							### [TelemetryClient API](https://docs.microsoft.com/en-us/azure/azure-monitor/app/api-custom-events-metrics)
+
+							| Method | Used For |
+							| ----------- | ----------- |
+							| TrackPageView | Pages, screens, blades, or forms. |
+							| TrackEvent | User actions and other events. Used to track user behavior or to monitor performance. | 
+							| GetMetric | Zero and multidimensional metrics, centrally configured aggregation, C# only. | 							
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							| Method | Used For |
+							| ----------- | ----------- |
+							| TrackMetric | Performance measurements such as queue lengths not related to specific events. | 
+							| TrackException | Logging exceptions for diagnosis. Trace where they occur in relation to other events and examine stack traces. |
+							| TrackRequest | Logging the frequency and duration of server requests for performance analysis. |							
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							| Method | Used For |
+							| ----------- | ----------- |
+							| TrackTrace | Resource Diagnostic log messages. You can also capture third-party logs. |
+							| TrackDependency | Logging the duration and frequency of calls to external components that your app depends on. |
+						</script>
+					</section>
+				</section>
+				
+				<section>
+					<section data-background-image="img/mobile-sync.png"
+							 data-background-size="contain">
+					</section>
+
+
+					<section data-background-image="img/mobile-sync-telemetry.png" 
+							data-background-size="contain">	
+					</section>
 				</section>
 
 				<section>
