@@ -12,6 +12,20 @@
 
 		<!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+		<style>
+			div.code {
+				width: -moz-fit-content;
+  				width: fit-content;				
+				height: fit-content;
+				height: -moz-fit-content
+			}
+			code {
+				width: -moz-fit-content;
+  				width: fit-content;	
+				height: fit-content;
+				height: -moz-fit-content
+			}
+		</style>
 	</head>
 	<body>
 		<div>
@@ -48,7 +62,7 @@
 
 				<section data-markdown>
 					<script type="text/template">						
-						## Suddath Technology Landscape
+						### Suddath Technology Landscape
 						- Cloud first partnered with [Microsoft Azure](https://portal.azure.com)
 						- [Azure Devops](https://dev.azure.com/) for source control and CICD
 						- Web Applications - [Angular Spa](https://angular.io/) w/API's in C#
@@ -59,7 +73,7 @@
 				
 				<section data-markdown>
 					<script type="text/template">						
-						## What we will cover in this talk
+						### What we will cover in this talk
 						- Understand the terms Health, Monitoring and Observability
 						- Review the Architecture of a sytem in the context of health, monitoring, and observability
 						- Examine the tools available in the Azure ecosystem
@@ -75,7 +89,7 @@
 					
 					<section data-markdown>
 						<script type="text/template">
-							## System Health
+							### System Health
 														
 							According the the [World Health Organization](https://www.who.int/about/governance/constitution), health is defined as a state of complete physical, mental and social well-being and not merely the absence of disease or infirmity.
 						</script>
@@ -83,7 +97,7 @@
 
 					<section data-markdown>
 						<script type="text/template">
-							## Monitoring
+							### Monitoring
 														
 							From the [Google SRE book](https://sre.google/sre-book/monitoring-distributed-systems/) monitoring is defined as collecting, processing, aggregating, and displaying real-time quantitative data about a system, such as query counts and types, error counts and types, processing times, and server lifetimes.
 						</script>
@@ -91,7 +105,7 @@
 
 					<section data-markdown>
 						<script type="text/template">
-							## Observability
+							### Observability
 														
 							According to [Honeycomb](https://docs.honeycomb.io/getting-started/learning-about-observability/) observability is about being able to ask arbitrary questions about your environment without having to know ahead of time what you wanted to ask.
 						</script>
@@ -102,13 +116,13 @@
 					
 					<section data-markdown>
 						<script type="text/template">
-							## Let's look at a running system
+							### Let's look at a running system
 						</script>
 					</section>
 					
 					<section data-markdown>
 						<script type="text/template">
-							## Estimator
+							### Estimator
 														
 							[Estimator &#174;](https://suddath.com/news/suddath-wins-digital-edge-50-international-technology-award/) is an application primarilary used by Salespeople to estimate business moves.  The application is designed to be mobile first such that Salespeople can perform an estimate on-site.
 						</script>
@@ -116,7 +130,7 @@
 
 					<section data-markdown>
 						<script type="text/template">
-							## High-level components
+							### High-level components
 														
 							- Desktop application
 							- Web Application for managing rates
@@ -202,7 +216,7 @@
 
 					<section data-markdown>
 						<script type="text/template">
-							## Tools to add [Helth Checks](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-6.0) to an existing system
+							### Tools to add [Helth Checks](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-6.0) to an existing system
 														
 							- [Microsoft.Extensions.Diagnostics.HealthChecks](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks)
 							- [AspNetCore.HealthChecks.UI.Client](https://www.nuget.org/packages/AspNetCore.HealthChecks.UI.Client)
@@ -216,7 +230,25 @@
 				<section>
 					<section data-markdown>
 						<script type="text/template">
-							## HealthCheck endpoints and Probes
+							### Layering in HealthChecks
+														
+							![Alt text](img/healthchecks-add.png "Adding HealthChecks to csproj")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							### Adding to Startup.cs
+														
+							![Alt text](img/healthchecks-startup.png "Adding HealthChecks to Startup")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							### Turning on the HealthCheck endpoint in Azure
+														
+							![Alt text](img/healthchecks-enable.png "Enable HealthChecks on an Azure Resource")
 						</script>
 					</section>
 				</section>
@@ -224,8 +256,71 @@
 				<section>
 					<section data-markdown>
 						<script type="text/template">
-							## A UI for HealthChecks
+							### HealthCheck endpoints
+							![Alt text](img/healthchecks-endpoint.png "HealthCheck Endpoint Example")
 						</script>
+					</section>
+
+					<section>						
+							<h3><a href="https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks/blob/master/doc/webhooks.md">Configuring WebHooks</a></h3>
+							<div class="code">
+								<pre>
+								<code data-trim data-noescape>
+								setup
+								.AddWebhookNotification("webhook1",
+									uri: "status/200?code=ax3rt56s", 
+									payload: "{ message: \"Webhook report for [[LIVENESS]]: [[FAILURE]] - Description: [[DESCRIPTIONS]]\"}",
+									restorePayload: "{ message: \"[[LIVENESS]] is back to life\"}",
+									shouldNotifyFunc: (livenessName, report) => DateTime.UtcNow.Hour >= 8 && DateTime.UtcNow.Hour <= 23
+									customMessageFunc: (livenessName, report) =>
+									{
+										var failing = report.Entries.Where(e => e.Value.Status == UIHealthStatus.Unhealthy);
+										return $"{failing.Count()} healthchecks are failing";
+									},
+									customDescriptionFunc: (livenessName, report) =>
+									{
+										var failing = report.Entries.Where(e => e.Value.Status == UIHealthStatus.Unhealthy);
+										return $"HealthChecks with names {string.Join("/", failing.Select(f => f.Key))} are failing";
+									});
+								</code>
+								</pre>
+							</div>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							### [A UI for HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks#HealthCheckUI)
+							![Alt text](img/healthcheck-ui.png "HealthCheck UI")
+						</script>
+					</section>
+
+					<section>						
+						<h3>Incorporating HealthCheck UI</a></h3>
+						<div class="code">
+							<pre>
+							<code data-trim data-noescape>
+								using HealthChecks.UI.Core;
+								using HealthChecks.UI.InMemory.Storage;
+
+								public class Startup
+								{
+									public void ConfigureServices(IServiceCollection services)
+									{
+										services
+											.AddHealthChecksUI()
+											.AddInMemoryStorage();
+									}
+
+									public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+									{
+										app
+											.UseRouting()
+											.UseEndpoints(config => config.MapHealthChecksUI());
+									}
+								}
+							</code>
+							</pre>
+						</div>
 					</section>
 				</section>
 
@@ -234,6 +329,29 @@
 						<script type="text/template">
 							## Example Custom HealthCheck
 						</script>
+					</section>
+
+					<section>						
+						<h3>Implement <a href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.diagnostics.healthchecks.ihealthcheck?view=dotnet-plat-ext-6.0">IHealthCheck</a></h3>
+						<div class="code">
+							<pre>
+							<code data-trim data-noescape>
+						public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, 
+																					     CancellationToken cancellationToken = default)
+						{
+							try {
+								if (await _authorizationService.Authorize() is FailedResponse failedAuthResponse)
+								{
+									throw failedAuthResponse.GetException();
+								}											
+								return HealthCheckResult.Healthy();
+							} catch(Exception ex) {
+								return HealthCheckResult.Degraded();
+							}
+						}
+							</code>
+							</pre>
+						</div>
 					</section>
 				</section>
 
