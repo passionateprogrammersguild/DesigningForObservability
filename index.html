@@ -43,33 +43,36 @@
 	 				</aside>
 				</section>
 
-				<!--A Little about me -->				
+				<!--Introduction section -->
 				<section>
-					<div>
-						<img src="img/me.jpg">
-					</div>
+					<section>
+						<div>
+							<img src="img/me.jpg" alt="Picture of Michael Mann">
+						</div>
 
-					<p>
-						Hi, I'm Michael Mann. I am the Technical Lead for the Moving and Logistics Division at Suddath. Suddath is a Transportation and Logistics company that has been in business for over 100 years.
-					</p>
-				</section>
+						<p>
+							Hi, I'm Michael Mann. I am the Technical Lead for the Moving and Logistics Division at Suddath. Suddath is a Transportation and Logistics company that has been in business for over 100 years.
+						</p>
+					</section>
 
-				<section data-markdown>
-					<script type="text/template">
-						![Alt text](img/organization.png "Organizational Structure")
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">						
-						### Suddath Technology Landscape
-						- Cloud first partnered with [Microsoft Azure](https://portal.azure.com)
-						- [Azure Devops](https://dev.azure.com/) for source control and CICD
-						- Web Applications - [Angular Spa](https://angular.io/) w/API's in C#
-						- Desktop Applications - [WinUI3](https://docs.microsoft.com/en-us/windows/apps/winui/winui3/) with [Realm](https://realm.io/) for local sync and API's in C#
-						- Mobile Applications - [Xamarin Forms](https://docs.microsoft.com/en-us/xamarin/get-started/what-is-xamarin-forms) with [Realm](https://realm.io/) for local sync and API's in C# 						
-					</script>
+					<section data-markdown>
+						<script type="text/template">
+							![Alt text](img/organization.png "Organizational Structure")
+						</script>
+					</section>
+	
+					<section data-markdown>
+						<script type="text/template">
+							### Suddath Technology Landscape
+							- Cloud first partnered with [Microsoft Azure](https://portal.azure.com)
+							- [Azure Devops](https://dev.azure.com/) for source control and CICD
+							- Web Applications - [Angular Spa](https://angular.io/) w/API's in C#
+							- Desktop Applications - [WinUI3](https://docs.microsoft.com/en-us/windows/apps/winui/winui3/) with [Realm](https://realm.io/) for local sync and API's in C#
+							- Mobile Applications - [Xamarin Forms](https://docs.microsoft.com/en-us/xamarin/get-started/what-is-xamarin-forms) with [Realm](https://realm.io/) for local sync and API's in C# 						
+						</script>
+					</section>
 				</section>				
+				
 				
 				<section data-markdown>
 					<script type="text/template">						
@@ -224,7 +227,7 @@
 
 					<section data-markdown>
 						<script type="text/template">
-							### Tools to add [Helth Checks](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-6.0) to an existing system
+							### Tools to add [Health Checks](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-6.0) to an existing system
 														
 							- [Microsoft.Extensions.Diagnostics.HealthChecks](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks)
 							- [AspNetCore.HealthChecks.UI.Client](https://www.nuget.org/packages/AspNetCore.HealthChecks.UI.Client)
@@ -362,8 +365,6 @@
 						</div>
 					</section>
 				</section>
-
-
 				<section>
 					<section data-markdown>
 						<script type="text/template">
@@ -426,6 +427,72 @@
 						</script>
 					</section>
 				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							### Tools to add [Monitoring](https://docs.microsoft.com/en-us/azure/azure-monitor/app/asp-net-core) to an existing system
+														
+							- [Microsoft.ApplicationInsights.AspNetCore](https://www.nuget.org/packages/Microsoft.ApplicationInsights/)
+							- [Serilog.Sinks.ApplicationInsights](https://www.nuget.org/packages/Serilog.Sinks.ApplicationInsights)							
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							### Layering in Monitoring
+														
+							![Alt text](img/monitoring-add.png "Adding Monitoring to csproj")
+						</script>
+					</section>
+
+					<section>
+						<h3>Adding to Startup.cs</h3>
+						<div class="code">
+							<pre>
+							<code data-trim data-noescape>
+								// This method gets called by the runtime. Use this method to add services to the container.
+								public void ConfigureServices(IServiceCollection services)
+								{
+									// The following line enables Application Insights telemetry collection.
+									services.AddApplicationInsightsTelemetry();
+
+									// This code adds other services for your application.
+									services.AddMvc();
+								}
+							</code>
+							</pre>
+						</div>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							### Don't Forget the Connection String
+														
+							![Alt text](img/instrumentationkey.png "The App Insights Connection String and instrumentationkey")
+						</script>
+					</section>
+							
+					<section>
+						<h3>Local Testing of Monitoring</h3>
+						<div class="code">
+							<pre>
+							<code data-trim data-noescape>
+								{
+									"ApplicationInsights": {
+									  "ConnectionString" : "Copy connection string from Application Insights Resource Overview"
+									},
+									"Logging": {
+									  "LogLevel": {
+										"Default": "Warning"
+									  }
+									}
+								  }
+							</code>
+							</pre>
+						</div>
+					</section>
+				</section>
 				
 				<section>
 					<section data-markdown>
@@ -436,22 +503,101 @@
 					</section>
 
 
-					<section data-background-image="img/mobile-sync-telemetry.png" 
-							data-background-size="contain">	
+					<section data-markdown>
+						<script type="text/template">
+							#### App Insights Monitoring with no changes
+							<img src="img/mobile-sync-telemetry-nochanges.png" alt="Mobile Sync Simple Telemetry" />					
+						</script>
 					</section>
 
-					<section data-background-image="img/mobile-sync-appinsights-example.png" 
-							data-background-size="contain">	
+					<section data-markdown>
+						<script type="text/template">
+							#### App Insights Monitoring with an exception
+							<img src="img/mobile-sync-telemetry-nochanges-exception.png" alt="Mobile Sync Simple Telemetry with an exception" />					
+						</script>
 					</section>
 
+					<section data-markdown>
+						<script type="text/template">
+							#### App Insights Monitoring with TelemetryClient Logging the exception
+							<img src="img/mobile-sync-telemetry-telemetryclient-exception.png" alt="Mobile Sync Simple Telemetry with TelemetryClient Logging the exception" />					
+						</script>
+					</section>
+				</section>
 
+				<section>
+					<section>
+						<h3>Adding the Logged in User with a TelemetryInitializer</h3>
+						<div class="code">
+							<pre>
+							<code data-trim data-noescape>
+								protected override void OnInitializeTelemetry(HttpContext platformContext, 
+								RequestTelemetry? requestTelemetry, ITelemetry telemetry)
+							{
+								if (platformContext?.User?.Identity?.IsAuthenticated != true)
+									return;
+					
+								if (requestTelemetry != null)
+								{
+									requestTelemetry.Context.User.AuthenticatedUserId = platformContext.User.TelemetryUserId();
+								}
+							}
+							</code>
+							</pre>
+						</div>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							#### App Insights Monitoring with TelemetryInitializer
+							<img src="img/mobile-sync-telemetry-telemetryinitializer.png" alt="Mobile Sync Simple TelemetryInitializer add Logged in User" />					
+						</script>
+					</section>
 				</section>
 
 				<section>
 					<section data-markdown>
 						<script type="text/template">
-							### Observability in Azure with [Kusto](https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/) and [Alerts](https://docs.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-overview)
-							
+							#### Adding Custom Events and Metrics with TelemetryClient - 1
+							<img src="img/mobile-sync-telemetry-customeventsandmetrics-code-1.png" alt="Mobile Sync Adding Custom Events and Metrics Page 1" />					
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							#### Adding Custom Events and Metrics with TelemetryClient - 2
+							<img src="img/mobile-sync-telemetry-customeventsandmetrics-code-2.png" alt="Mobile Sync Adding Custom Events and Metrics Page 2" />					
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							#### App Insights Monitoring with Custom Events and Metrics
+							<img src="img/mobile-sync-telemetry-customeventsandmetrics-telemetry.png" alt="Mobile Sync App Insights Custom Events and Metrics" />					
+						</script>
+					</section>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							#### Filtering Telemetry Output with ITelemetryProcessor - 1
+							<img src="img/mobile-sync-telemetry-telemetryprocessor-code-1.png" alt="Mobile Sync TelemetryProcessor Example Code Page 1" />					
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							#### Filtering Telemetry Output with ITelemetryProcessor - 2
+							<img src="img/mobile-sync-telemetry-telemetryprocessor-code-2.png" alt="Mobile Sync TelemetryProcessor Example Code Page 2" />					
+						</script>
+					</section>										
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							### Observability in Azure with [Kusto](https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/)
 						</script>
 					</section>
 
@@ -462,18 +608,27 @@
 						</script>
 					</section>
 
-					<section data-background-image="img/canned-kql-queries.png" 
-							data-background-size="contain">	
+					<section data-markdown>
+						<script type="text/template">
+							#### Sample Kusto Queries
+							<img src="img/canned-kql-queries.png" alt="Get started with sample Kusto queries" />					
+						</script>
 					</section>
 				</section>
 
-				
+				<section data-markdown>
+					<script type="text/template">
+						### [Azure Monitoring Alerts](https://docs.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-overview) an Exercise for the audience							
+					</script>
+				</section>
+			
 				<section>
 					<h1>Thank you</h2>
 					<div>							
-						<span><a href="mailto:mmann2943@gmail.com">mmann2943@gmail.com</a></span>							
+						<span><a href="mailto:mmann2943@gmail.com">mmann2943@gmail.com</a></span>
+						<span><a href="https://github.com/passionateprogrammersguild/DesigningForObservability">passionateprogrammersguild on github</a></span>
 					</div>
-				</section>					
+				</section>
 			</div>
 		</div>
 
